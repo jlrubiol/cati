@@ -1,0 +1,261 @@
+<?php
+
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\grid\GridView;
+use yii\widgets\DetailView;
+use yii\widgets\Pjax;
+use dmstr\bootstrap\Tabs;
+
+/**
+* @var yii\web\View $this
+* @var app\models\InformePregunta $model
+*/
+$copyParams = $model->attributes;
+
+$this->title = Yii::t('models', 'Informe Pregunta');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('models', 'Informe Preguntas'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = Yii::t('cruds', 'View');
+?>
+<div class="giiant-crud informe-pregunta-view">
+
+    <!-- flash message -->
+    <?php if (\Yii::$app->session->getFlash('deleteError') !== null) : ?>
+        <span class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+            <?= \Yii::$app->session->getFlash('deleteError') ?>
+        </span>
+    <?php endif; ?>
+
+    <h1>
+        <?= Yii::t('models', 'Informe Pregunta') ?>
+        <small>
+            <?= Html::encode($model->id) ?>
+        </small>
+    </h1>
+
+
+    <div class="clearfix crud-navigation">
+
+        <!-- menu buttons -->
+        <div class='pull-left'>
+            <?= Html::a(
+            '<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('cruds', 'Edit'),
+            [ 'update', 'id' => $model->id],
+            ['class' => 'btn btn-info']) ?>
+
+            <?= Html::a(
+            '<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('cruds', 'Copy'),
+            ['create', 'id' => $model->id, 'InformePregunta'=>$copyParams],
+            ['class' => 'btn btn-success']) ?>
+
+            <?= Html::a(
+            '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('cruds', 'New'),
+            ['create'],
+            ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <div class="pull-right">
+            <?= Html::a('<span class="glyphicon glyphicon-list"></span> '
+            . Yii::t('cruds', 'Full list'), ['index'], ['class'=>'btn btn-default']) ?>
+        </div>
+
+    </div>
+
+    <hr/>
+
+    <?php $this->beginBlock('app\models\InformePregunta'); ?>
+
+    
+    <?= DetailView::widget([
+    'model' => $model,
+    'attributes' => [
+            'anyo',
+        'editable',
+        'editable_1',
+        'invisible_1',
+        'invisible_3',
+        'oblig_def',
+        'apartado',
+        'tipo',
+        'tabla',
+    ],
+    ]); ?>
+
+    
+    <hr/>
+
+    <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('cruds', 'Delete'), ['delete', 'id' => $model->id],
+    [
+    'class' => 'btn btn-danger',
+    'data-confirm' => '' . Yii::t('cruds', 'Are you sure to delete this item?') . '',
+    'data-method' => 'post',
+    ]); ?>
+    <?php $this->endBlock(); ?>
+
+
+    
+<?php $this->beginBlock('InformeRespuestas'); ?>
+<div style='position: relative'>
+<div style='position:absolute; right: 0px; top: 0px;'>
+  <?= Html::a(
+            '<span class="glyphicon glyphicon-list"></span> ' . Yii::t('cruds', 'List All') . ' Informe Respuestas',
+            ['informe-respuesta/index'],
+            ['class'=>'btn text-muted btn-xs']
+        ) ?>
+  <?= Html::a(
+            '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('cruds', 'New') . ' Informe Respuesta',
+            ['informe-respuesta/create', 'InformeRespuesta' => ['informe_pregunta_id' => $model->id]],
+            ['class'=>'btn btn-success btn-xs']
+        ); ?>
+</div>
+</div>
+<?php Pjax::begin(['id'=>'pjax-InformeRespuestas', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-InformeRespuestas ul.pagination a, th a']) ?>
+<?=
+ '<div class="table-responsive">'
+ . \yii\grid\GridView::widget([
+    'layout' => '{summary}{pager}<br/>{items}{pager}',
+    'dataProvider' => new \yii\data\ActiveDataProvider([
+        'query' => $model->getInformeRespuestas(),
+        'pagination' => [
+            'pageSize' => 20,
+            'pageParam'=>'page-informerespuestas',
+        ]
+    ]),
+    'pager'        => [
+        'class'          => yii\widgets\LinkPager::className(),
+        'firstPageLabel' => Yii::t('cruds', 'First'),
+        'lastPageLabel'  => Yii::t('cruds', 'Last')
+    ],
+    'columns' => [
+ [
+    'class'      => 'yii\grid\ActionColumn',
+    'template'   => '{view} {update}',
+    'contentOptions' => ['nowrap'=>'nowrap'],
+    'urlCreator' => function ($action, $model, $key, $index) {
+        // using the column name as key, not mapping to 'id' like the standard generator
+        $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
+        $params[0] = 'informe-respuesta' . '/' . $action;
+        $params['InformeRespuesta'] = ['informe_pregunta_id' => $model->primaryKey()[0]];
+        return $params;
+    },
+    'buttons'    => [
+        
+    ],
+    'controller' => 'informe-respuesta'
+],
+        'id',
+// generated by schmunk42\giiant\generators\crud\providers\core\RelationProvider::columnFormat
+[
+    'class' => yii\grid\DataColumn::className(),
+    'attribute' => 'estudio_id',
+    'value' => function ($model) {
+        if ($rel = $model->estudio) {
+            return Html::a($rel->id, ['estudio/view', 'id' => $rel->id,], ['data-pjax' => 0]);
+        } else {
+            return '';
+        }
+    },
+    'format' => 'raw',
+],
+        'anyo',
+        'apartado',
+        'estudio_id_nk',
+]
+])
+ . '</div>' 
+?>
+<?php Pjax::end() ?>
+<?php $this->endBlock() ?>
+
+
+<?php $this->beginBlock('Translations'); ?>
+<div style='position: relative'>
+<div style='position:absolute; right: 0px; top: 0px;'>
+  <?= Html::a(
+            '<span class="glyphicon glyphicon-list"></span> ' . Yii::t('cruds', 'List All') . ' Translations',
+            ['informe-pregunta-lang/index'],
+            ['class'=>'btn text-muted btn-xs']
+        ) ?>
+  <?= Html::a(
+            '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('cruds', 'New') . ' Translation',
+            ['informe-pregunta-lang/create', 'InformePreguntaLang' => ['informe_pregunta_id' => $model->id]],
+            ['class'=>'btn btn-success btn-xs']
+        ); ?>
+</div>
+</div>
+<?php Pjax::begin(['id'=>'pjax-Translations', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Translations ul.pagination a, th a']) ?>
+<?=
+ '<div class="table-responsive">'
+ . \yii\grid\GridView::widget([
+    'layout' => '{summary}{pager}<br/>{items}{pager}',
+    'dataProvider' => new \yii\data\ActiveDataProvider([
+        'query' => $model->getTranslations(),
+        'pagination' => [
+            'pageSize' => 20,
+            'pageParam'=>'page-translations',
+        ]
+    ]),
+    'pager'        => [
+        'class'          => yii\widgets\LinkPager::className(),
+        'firstPageLabel' => Yii::t('cruds', 'First'),
+        'lastPageLabel'  => Yii::t('cruds', 'Last')
+    ],
+    'columns' => [
+ [
+    'class'      => 'yii\grid\ActionColumn',
+    'template'   => '{view} {update}',
+    'contentOptions' => ['nowrap'=>'nowrap'],
+    'urlCreator' => function ($action, $model, $key, $index) {
+        // using the column name as key, not mapping to 'id' like the standard generator
+        $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
+        $params[0] = 'informe-pregunta-lang' . '/' . $action;
+        $params['InformePreguntaLang'] = ['informe_pregunta_id' => $model->primaryKey()[0]];
+        return $params;
+    },
+    'buttons'    => [
+        
+    ],
+    'controller' => 'informe-pregunta-lang'
+],
+        'id',
+        'language',
+        'titulo',
+        'info:ntext',
+        'explicacion:ntext',
+        'texto_comun:ntext',
+]
+])
+ . '</div>' 
+?>
+<?php Pjax::end() ?>
+<?php $this->endBlock() ?>
+
+
+    <?= Tabs::widget(
+                 [
+                     'id' => 'relation-tabs',
+                     'encodeLabels' => false,
+                     'items' => [
+ [
+    'label'   => '<b class=""># '.Html::encode($model->id).'</b>',
+    'content' => $this->blocks['app\models\InformePregunta'],
+    'active'  => true,
+],
+[
+    'content' => $this->blocks['InformeRespuestas'],
+    'label'   => '<small>Informe Respuestas <span class="badge badge-default">'. $model->getInformeRespuestas()->count() . '</span></small>',
+    'active'  => false,
+],
+[
+    'content' => $this->blocks['Translations'],
+    'label'   => '<small>Translations <span class="badge badge-default">'. $model->getTranslations()->count() . '</span></small>',
+    'active'  => false,
+],
+ ]
+                 ]
+    );
+    ?>
+</div>

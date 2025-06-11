@@ -1,0 +1,267 @@
+<?php
+
+use yii\helpers\Html;
+use yii\helpers\Url;
+use yii\grid\GridView;
+use yii\widgets\DetailView;
+use yii\widgets\Pjax;
+use dmstr\bootstrap\Tabs;
+
+/**
+* @var yii\web\View $this
+* @var app\models\Centro $model
+*/
+$copyParams = $model->attributes;
+
+$this->title = Yii::t('models', 'Centro');
+$this->params['breadcrumbs'][] = ['label' => Yii::t('models', 'Centros'), 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => (string)$model->id, 'url' => ['view', 'id' => $model->id]];
+$this->params['breadcrumbs'][] = Yii::t('cruds', 'View');
+?>
+<div class="giiant-crud centro-view">
+
+    <!-- flash message -->
+    <?php if (\Yii::$app->session->getFlash('deleteError') !== null) : ?>
+        <span class="alert alert-info alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+            <?= \Yii::$app->session->getFlash('deleteError') ?>
+        </span>
+    <?php endif; ?>
+
+    <h1>
+        <?= Yii::t('models', 'Centro') ?>
+        <small>
+            <?= Html::encode($model->id) ?>
+        </small>
+    </h1>
+
+
+    <div class="clearfix crud-navigation">
+
+        <!-- menu buttons -->
+        <div class='pull-left'>
+            <?= Html::a(
+            '<span class="glyphicon glyphicon-pencil"></span> ' . Yii::t('cruds', 'Edit'),
+            [ 'update', 'id' => $model->id],
+            ['class' => 'btn btn-info']) ?>
+
+            <?= Html::a(
+            '<span class="glyphicon glyphicon-copy"></span> ' . Yii::t('cruds', 'Copy'),
+            ['create', 'id' => $model->id, 'Centro'=>$copyParams],
+            ['class' => 'btn btn-success']) ?>
+
+            <?= Html::a(
+            '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('cruds', 'New'),
+            ['create'],
+            ['class' => 'btn btn-success']) ?>
+        </div>
+
+        <div class="pull-right">
+            <?= Html::a('<span class="glyphicon glyphicon-list"></span> '
+            . Yii::t('cruds', 'Full list'), ['index'], ['class'=>'btn btn-default']) ?>
+        </div>
+
+    </div>
+
+    <hr/>
+
+    <?php $this->beginBlock('app\models\Centro'); ?>
+
+    
+    <?= DetailView::widget([
+    'model' => $model,
+    'attributes' => [
+            'activo',
+        'nip_decano',
+        'anyos_validez',
+        'fecha_acreditacion',
+        'rrhh_id_nk',
+        'tipo_centro',
+        'telefono',
+        'direccion',
+        'municipio',
+        'url:url',
+        'nombre_decano',
+        'email_decano:email',
+        'tratamiento_decano',
+        'acreditacion_url:url',
+    ],
+    ]); ?>
+
+    
+    <hr/>
+
+    <?= Html::a('<span class="glyphicon glyphicon-trash"></span> ' . Yii::t('cruds', 'Delete'), ['delete', 'id' => $model->id],
+    [
+    'class' => 'btn btn-danger',
+    'data-confirm' => '' . Yii::t('cruds', 'Are you sure to delete this item?') . '',
+    'data-method' => 'post',
+    ]); ?>
+    <?php $this->endBlock(); ?>
+
+
+    
+<?php $this->beginBlock('Plans'); ?>
+<div style='position: relative'>
+<div style='position:absolute; right: 0px; top: 0px;'>
+  <?= Html::a(
+            '<span class="glyphicon glyphicon-list"></span> ' . Yii::t('cruds', 'List All') . ' Plans',
+            ['plan/index'],
+            ['class'=>'btn text-muted btn-xs']
+        ) ?>
+  <?= Html::a(
+            '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('cruds', 'New') . ' Plan',
+            ['plan/create', 'Plan' => ['centro_id' => $model->id]],
+            ['class'=>'btn btn-success btn-xs']
+        ); ?>
+</div>
+</div>
+<?php Pjax::begin(['id'=>'pjax-Plans', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Plans ul.pagination a, th a']) ?>
+<?=
+ '<div class="table-responsive">'
+ . \yii\grid\GridView::widget([
+    'layout' => '{summary}{pager}<br/>{items}{pager}',
+    'dataProvider' => new \yii\data\ActiveDataProvider([
+        'query' => $model->getPlans(),
+        'pagination' => [
+            'pageSize' => 20,
+            'pageParam'=>'page-plans',
+        ]
+    ]),
+    'pager'        => [
+        'class'          => yii\widgets\LinkPager::className(),
+        'firstPageLabel' => Yii::t('cruds', 'First'),
+        'lastPageLabel'  => Yii::t('cruds', 'Last')
+    ],
+    'columns' => [
+ [
+    'class'      => 'yii\grid\ActionColumn',
+    'template'   => '{view} {update}',
+    'contentOptions' => ['nowrap'=>'nowrap'],
+    'urlCreator' => function ($action, $model, $key, $index) {
+        // using the column name as key, not mapping to 'id' like the standard generator
+        $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
+        $params[0] = 'plan' . '/' . $action;
+        $params['Plan'] = ['centro_id' => $model->primaryKey()[0]];
+        return $params;
+    },
+    'buttons'    => [
+        
+    ],
+    'controller' => 'plan'
+],
+        'id',
+        'id_nk',
+// generated by schmunk42\giiant\generators\crud\providers\core\RelationProvider::columnFormat
+[
+    'class' => yii\grid\DataColumn::className(),
+    'attribute' => 'estudio_id',
+    'value' => function ($model) {
+        if ($rel = $model->estudio) {
+            return Html::a($rel->id, ['estudio/view', 'id' => $rel->id,], ['data-pjax' => 0]);
+        } else {
+            return '';
+        }
+    },
+    'format' => 'raw',
+],
+        'creditos',
+        'duracion',
+        'fecha_boe',
+        'normativa',
+        'nombre_coordinador',
+        'email_coordinador:email',
+]
+])
+ . '</div>' 
+?>
+<?php Pjax::end() ?>
+<?php $this->endBlock() ?>
+
+
+<?php $this->beginBlock('Translations'); ?>
+<div style='position: relative'>
+<div style='position:absolute; right: 0px; top: 0px;'>
+  <?= Html::a(
+            '<span class="glyphicon glyphicon-list"></span> ' . Yii::t('cruds', 'List All') . ' Translations',
+            ['centro-lang/index'],
+            ['class'=>'btn text-muted btn-xs']
+        ) ?>
+  <?= Html::a(
+            '<span class="glyphicon glyphicon-plus"></span> ' . Yii::t('cruds', 'New') . ' Translation',
+            ['centro-lang/create', 'CentroLang' => ['centro_id' => $model->id]],
+            ['class'=>'btn btn-success btn-xs']
+        ); ?>
+</div>
+</div>
+<?php Pjax::begin(['id'=>'pjax-Translations', 'enableReplaceState'=> false, 'linkSelector'=>'#pjax-Translations ul.pagination a, th a']) ?>
+<?=
+ '<div class="table-responsive">'
+ . \yii\grid\GridView::widget([
+    'layout' => '{summary}{pager}<br/>{items}{pager}',
+    'dataProvider' => new \yii\data\ActiveDataProvider([
+        'query' => $model->getTranslations(),
+        'pagination' => [
+            'pageSize' => 20,
+            'pageParam'=>'page-translations',
+        ]
+    ]),
+    'pager'        => [
+        'class'          => yii\widgets\LinkPager::className(),
+        'firstPageLabel' => Yii::t('cruds', 'First'),
+        'lastPageLabel'  => Yii::t('cruds', 'Last')
+    ],
+    'columns' => [
+ [
+    'class'      => 'yii\grid\ActionColumn',
+    'template'   => '{view} {update}',
+    'contentOptions' => ['nowrap'=>'nowrap'],
+    'urlCreator' => function ($action, $model, $key, $index) {
+        // using the column name as key, not mapping to 'id' like the standard generator
+        $params = is_array($key) ? $key : [$model->primaryKey()[0] => (string) $key];
+        $params[0] = 'centro-lang' . '/' . $action;
+        $params['CentroLang'] = ['centro_id' => $model->primaryKey()[0]];
+        return $params;
+    },
+    'buttons'    => [
+        
+    ],
+    'controller' => 'centro-lang'
+],
+        'id',
+        'language',
+        'nombre',
+]
+])
+ . '</div>' 
+?>
+<?php Pjax::end() ?>
+<?php $this->endBlock() ?>
+
+
+    <?= Tabs::widget(
+                 [
+                     'id' => 'relation-tabs',
+                     'encodeLabels' => false,
+                     'items' => [
+ [
+    'label'   => '<b class=""># '.Html::encode($model->id).'</b>',
+    'content' => $this->blocks['app\models\Centro'],
+    'active'  => true,
+],
+[
+    'content' => $this->blocks['Plans'],
+    'label'   => '<small>Plans <span class="badge badge-default">'. $model->getPlans()->count() . '</span></small>',
+    'active'  => false,
+],
+[
+    'content' => $this->blocks['Translations'],
+    'label'   => '<small>Translations <span class="badge badge-default">'. $model->getTranslations()->count() . '</span></small>',
+    'active'  => false,
+],
+ ]
+                 ]
+    );
+    ?>
+</div>

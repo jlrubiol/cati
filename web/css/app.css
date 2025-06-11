@@ -1,0 +1,605 @@
+body {
+    font-family: 'LatoLatinWeb', sans-serif;
+    /*
+    background: url("img/bg-pattern_nuevo1.png") #88A repeat scroll center 0;
+    background-size: 1500px;
+    */
+}
+
+.navbar-inverse {
+    background-color: #213C71;
+    /* #212121; */
+    font-size: 1.8rem;
+}
+
+.navbar-inverse .navbar-nav>li>a {
+    color: #d2d2d2;
+}
+
+.navbar-inverse .navbar-brand {
+    color: #d2d2d2;
+}
+
+.navbar-icono {
+    font-size: 29px;
+    line-height: 0;
+    margin-top: 9px;
+    vertical-align: top;
+}
+
+#contenedor-principal {
+    background-color: white;
+}
+
+.jumbotron h1 {
+    font-family: 'LatoLatinWebLight', sans-serif;
+    font-size: 4.8rem;
+}
+
+.jumbotron {
+    font-size: 4.8rem;
+}
+
+.footer {
+    background-color: #212121;
+    border-top: 0px;
+    color: #d2d2d2;
+    height: 280px;
+    margin: 0 auto;
+    max-width: 1500px;
+}
+
+.footer a {
+    text-decoration: none;
+}
+
+.footer a:hover {
+    color: white;
+}
+
+
+#listado li {
+    font-size: 1.6rem;
+    list-style-type: none;
+    overflow: visible;
+    position: relative;
+}
+
+#listado li::before {
+    content: ">";
+    left: -2.8rem;
+    top: -1rem;
+    color: rgb(33, 102, 164);
+    /* font-family: 'LatoLatinWeb'; */
+    font-size: 2.8rem;
+    font-weight: bold;
+    position: absolute;
+    /* vertical-align: middle;
+    display: inline-block; */
+}
+
+.listado li {
+    font-size: 1.6rem;
+    list-style-type: none;
+    overflow: visible;
+    position: relative;
+}
+
+.listado li::before {
+    content: ">";
+    left: -2.8rem;
+    top: -1rem;
+    color: rgb(33, 102, 164);
+    /* font-family: 'LatoLatinWeb'; */
+    font-size: 2.8rem;
+    font-weight: bold;
+    position: absolute;
+    /* vertical-align: middle;
+    display: inline-block; */
+}
+
+h3 {
+    color: #000080;
+    font-family: 'LatoLatinWebLight', sans-serif;
+    font-weight: 100;
+    margin: 3rem 0 2rem;
+}
+
+h2 {
+    color: #000080;
+    margin: 3rem 0 2rem;
+}
+
+h2 a:hover {
+    text-decoration: none;
+}
+
+h1 a:hover {
+    text-decoration: none;
+}
+
+#search-studies {
+    margin: 75px 25px 50px 25px;
+    text-align: center;
+    font-family: 'LatoLatinWeb', sans-serif;
+}
+
+#predictive-search {
+    width: 355px;
+    /* 255px;*/
+    height: 46px;
+    padding: 10px 36px 10px 10px;
+    background-color: rgba(255, 255, 255, 0.33);
+    border: 1px solid rgba(28, 33, 43, 0.72);
+    margin: 0;
+    margin-right: -4px;
+    font-size: 1.4rem;
+    border-radius: 4px 0 0 4px;
+    line-height: normal;
+    display: initial;
+}
+
+#predictive-search-submit {
+    background: url("img/buscar-white.png") no-repeat scroll center center #213C71;
+    border: 1px solid rgba(22, 37, 67, 0.72);
+    cursor: pointer;
+    height: 46px;
+    /*41px;*/
+    text-indent: -10000em;
+    width: 45px;
+    border-radius: 0 4px 4px 0;
+    line-height: normal;
+}
+
+.centros {
+    list-style: none;
+    padding-left: 0;
+}
+
+.centros-asig {
+    color: white;
+    background: #2166a4;
+    display: inline-block;
+    font-family: 'LatoLatinWeb', sans-serif;
+    font-size: 1.4rem;
+    font-weight: normal;
+    line-height: normal;
+    list-style-type: none;
+    margin-bottom: 4px;
+    margin-top: 10px;
+    overflow: visible;
+    padding: 7px 11px;
+    position: relative;
+    text-decoration: none;
+    text-transform: uppercase;
+}
+
+.centros-asig span {
+    display: block;
+    text-align: center;
+    font-size: 10px;
+}
+
+.centros-asig a {
+    color: white;
+    text-decoration: none;
+}
+
+.field__label {
+    color: #6595C0;
+    font-size: 0.9em;
+    display: inline-block;
+    font-family: 'LatoLatinWeb', sans-serif;
+    font-weight: normal;
+    margin: 10px 0 25px 15px;
+    border-bottom: 1px solid #BACFE2;
+}
+
+.tabs-left {
+    font-size: 1.6rem;
+}
+
+.topogt {
+    color: rgb(30, 51, 92);
+    display: inline-block;
+    font-size: 2rem;
+    line-height: 19px;
+}
+
+.tab-pane {
+    color: #535353;
+    font-size: 1.6rem;
+
+}
+
+.region {
+    margin-top: 0px;
+}
+
+#block-marcadelsitio {
+    margin-top: 50px;
+    /* width: 1200px; */
+    margin: 0 auto;
+    position: relative;
+    height: 107px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: transparent;
+}
+
+.site-logo {
+    width: 220px;
+    max-width: 100%;
+    height: auto;
+    border: 0;
+    background-color: transparent;
+}
+
+#block-smallsitetitleblock {
+    height: 110px;
+    font-family: 'LatoLatinWeb', sans-serif;
+    background: url(img/imagen-ribbon-sup.jpg) no-repeat center center #ebebeb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#block-smallsitetitleblock a {
+    text-decoration: none;
+}
+
+.rotulo-cabecera {
+    /* width: 1200px; */
+    margin: 0 0 0 50px;
+    position: relative;
+    font-family: 'LatoLatinWeb', sans-serif;
+    color: white;
+    font-size: 2.9rem;
+}
+
+.screen-reader {
+    position: absolute;
+    left: -10000px;
+    top: auto;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+}
+
+.itinerarios {
+    list-style: none;
+    margin: 0 0 0.75em 0;
+    padding: 0;
+}
+
+.itinerarios li {
+    display: inline-block;
+    margin: 0;
+    margin-bottom: 15px;
+    padding: 2px 10px 2px 0;
+    padding-left: 0 !important;
+}
+
+.itinerarios li a {
+    color: #0084b4;
+    text-decoration: none;
+    cursor: pointer;
+    padding: 5px;
+    /* font-size: 0.875rem; */
+    border: 2px solid rgb(101, 149, 192);
+    background-color: transparent;
+}
+
+.itinerarios li a:hover {
+    background: #6595c0;
+    color: white !important;
+    outline: 0;
+}
+
+.cabecera-azul table {
+    border: 0px;
+}
+
+.cabecera-azul thead {
+    background: #6595C0;
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.cabecera-azul thead tr {
+    border-bottom: 1px solid #167F92;
+}
+
+.cabecera-azul thead tr th {
+    border: 0px;
+    color: white;
+    padding: 0.375em 0.5em;
+    border-bottom: 0.1875em solid #C0C0C0;
+    font-weight: bold;
+}
+
+.cabecera-azul thead tr th a {
+    color: white;
+}
+
+.cabecera-azul tfoot {
+    background: #B2CADF;
+}
+
+.cabecera-azul tfoot tr td {
+    border: 0px;
+    font-weight: bold;
+}
+
+.cabecera-azul .filters {
+    background: #B2CADF;
+}
+
+.cabecera-azul tfoot {
+    background: #B2CADF;
+}
+
+.cabecera-azul tbody tr td {
+    border: 0px;
+}
+
+.cuadro-gris {
+    background-color: #e9e9ee;
+    border-radius: 3rem;
+    padding: 0.1rem 2rem 2rem 3rem;
+}
+
+/* Tooltip container */
+.tooltip {
+    position: relative;
+    display: inline-block;
+    border-bottom: 1px dotted black;
+    /* If you want dots under the hoverable text */
+    opacity: 1;
+}
+
+/* Tooltip text */
+.tooltip .tooltiptext {
+    visibility: hidden;
+    width: 120px;
+    background-color: #555;
+    color: #fff;
+    text-align: center;
+    padding: 5px 0;
+    border-radius: 6px;
+
+    /* Position the tooltip text */
+    position: absolute;
+    z-index: 1;
+    bottom: 125%;
+    left: 50%;
+    margin-left: -60px;
+
+    /* Fade in tooltip */
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+/* Tooltip arrow */
+.tooltip .tooltiptext::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    margin-left: -5px;
+    border-width: 5px;
+    border-style: solid;
+    border-color: #555 transparent transparent transparent;
+}
+
+/* Show the tooltip text when you mouse over the tooltip container */
+.tooltip:hover .tooltiptext {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+.indicadores td:nth-child(4) {
+    text-align: right;
+}
+
+.indicadores td:nth-child(5) {
+    text-align: right;
+}
+
+.indicadores td:nth-child(6) {
+    text-align: right;
+}
+
+.indicadores td:nth-child(7) {
+    text-align: right;
+}
+
+.indicadores td:nth-child(8) {
+    text-align: right;
+}
+
+.indicadores td:nth-child(9) {
+    text-align: right;
+}
+
+.indicadores td:nth-child(10) {
+    text-align: right;
+}
+
+.alert .glyphicon {
+    float: left;
+    font-size: 30px;
+    margin-right: 9px;
+    padding-top: 1px;
+}
+
+.alert div,
+.alert span,
+.alert p {
+    overflow: hidden;
+}
+
+/* Hide up/down arrows ("spinners") on input fields marked type="number" */
+.no-spinners {
+    -moz-appearance: textfield;
+}
+
+.no-spinners::-webkit-outer-spin-button,
+.no-spinners::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+@media screen {
+    .hide-from-screen {
+        display: none;
+    }
+}
+
+@media print {
+
+    .nav,
+    .breadcrumb,
+    .footer,
+    .navbar,
+    .noprint {
+        display: none !important;
+    }
+
+    /* Sobrescribo esta propiedad de Bootstrap para que
+     * al imprimir no se añada la URL a los enlaces.
+     */
+    a[href]:after {
+        content: "";
+    }
+
+    @page {
+        /* Default to portrait orientation for the entire page */
+        size: a4;
+        margin: 1cm;
+    }
+
+    body {
+        font-size: 10pt;
+        /* Debian packages: tex-gyre libgs10-common fonts-sil-gentium fonts-ebgaramond-extra fonts-liberation */
+        font-family: 'TeX Gyre Bonum', 'URW Bookman L', 'Bookman Old Style', 'Bookman', 'TeX Gyre Pagella', 'URW Palladio L', Palatino, 'Gentium', 'EB Garamond 12', 'Garamond', 'Liberation Serif', 'Times New Roman', Times, serif;
+        line-height: normal;
+        margin: 0cm;
+    }
+
+    .a4-landscape {
+
+        /* Apply landscape orientation to a specific section */
+        @page {
+            size: A4 landscape;
+        }
+    }
+
+    .listado {
+        margin-left: -3rem;
+    }
+
+    .listado li,
+    .listado li::before {
+        font-size: 1.2rem;
+    }
+
+    .listado li::before {
+        top: 0rem;
+        left: -1rem;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    table {
+        font-family: 'LatoLatinWeb', sans-serif;
+        font-size: 80%;
+    }
+
+    h1 {
+        font-size: 18pt;
+    }
+
+    h2 {
+        font-size: 16pt;
+        color: #000080;
+    }
+
+    h3 {
+        font-size: 14pt;
+        color: #000080;
+    }
+
+    h4 {
+        font-size: 12pt;
+    }
+
+    .col-sm-1,
+    .col-sm-2,
+    .col-sm-3,
+    .col-sm-4,
+    .col-sm-5,
+    .col-sm-6,
+    .col-sm-7,
+    .col-sm-8,
+    .col-sm-9,
+    .col-sm-10,
+    .col-sm-11,
+    .col-sm-12 {
+        float: left;
+    }
+
+    .col-sm-12 {
+        width: 100%;
+    }
+
+    .col-sm-11 {
+        width: 91.66666667%;
+    }
+
+    .col-sm-10 {
+        width: 83.33333333%;
+    }
+
+    .col-sm-9 {
+        width: 75%;
+    }
+
+    .col-sm-8 {
+        width: 66.66666667%;
+    }
+
+    .col-sm-7 {
+        width: 58.33333333%;
+    }
+
+    .col-sm-6 {
+        width: 50%;
+    }
+
+    .col-sm-5 {
+        width: 41.66666667%;
+    }
+
+    .col-sm-4 {
+        width: 33.33333333%;
+    }
+
+    .col-sm-3 {
+        width: 25%;
+    }
+
+    .col-sm-2 {
+        width: 16.66666667%;
+    }
+
+    .col-sm-1 {
+        width: 8.33333333%;
+    }
+}

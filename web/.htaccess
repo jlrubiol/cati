@@ -1,0 +1,12 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    
+    # Ajusta RewriteBase si tu aplicación no está directamente en la raíz.
+    # Si has apuntado cati.local a la carpeta web, normalmente:
+    RewriteBase /cati2/cati/web/
+    
+    # Si el archivo o carpeta no existe, redirige a index.php
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule . index.php [L]
+</IfModule>
